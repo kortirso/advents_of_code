@@ -1,4 +1,4 @@
-local total_distance = {}
+local day_01 = {}
 
 function read_lists_from_file()
   local file = io.open('data.txt', 'rb')
@@ -28,7 +28,7 @@ function read_lists_from_file()
   return first_list, second_list
 end
 
-function total_distance.calculate_distance()
+function day_01.calculate_distance()
   local first_list, second_list = read_lists_from_file()
   local result = 0
   
@@ -39,4 +39,26 @@ function total_distance.calculate_distance()
   return result
 end
 
-return total_distance
+function day_01.calculate_similarity()
+  local first_list, second_list = read_lists_from_file()
+  local result = 0
+  local number_amounts = {}
+
+  for _, v in pairs(second_list) do
+    if number_amounts[v] then
+      number_amounts[v] = number_amounts[v] + 1
+    else
+      number_amounts[v] = 1
+    end
+  end
+
+  for _, v in pairs(first_list) do
+    if number_amounts[v] then
+      result = result + v * number_amounts[v]
+    end
+  end
+
+  return result
+end
+
+return day_01
